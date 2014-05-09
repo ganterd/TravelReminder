@@ -1,4 +1,4 @@
-package com.example.travelreminder;
+package com.ganterd.travelreminder;
 
 import java.io.File;
 import java.io.FileInputStream;

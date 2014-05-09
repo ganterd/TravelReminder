@@ -1,4 +1,6 @@
-package com.example.travelreminder;
+package com.ganterd.travelreminder;
+
+import com.example.travelreminder.R;
 
 import android.app.Activity;
 import android.os.Bundle;
