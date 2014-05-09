@@ -1,10 +1,11 @@
 package com.ganterd.travelreminder;
 
-import com.example.travelreminder.R;
+import com.ganterd.travelreminder.R;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 
@@ -14,8 +15,15 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        RemindersHelper.init(this);
     }
-
+    
+    @Override
+    protected void onResume(){
+    	super.onResume();
+    	Reminder[] reminders = RemindersHelper.getAllReminders();
+    	Log.d("MainActivity", "Listing " + reminders.length + " reminders.");
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

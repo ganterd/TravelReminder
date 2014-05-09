@@ -1,6 +1,8 @@
 package com.ganterd.travelreminder;
 
-import com.example.travelreminder.R;
+import java.util.Date;
+
+import com.ganterd.travelreminder.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -32,8 +34,8 @@ public class CreateTravelReminderActivity extends Activity {
 	}
 	
 	public void createNewTravelReminder(View view){
-		// TODO: Store new reminder
-		// TODO: Create system reminder
+		RemindersHelper.saveReminder(new Reminder("testID", "ReminderName", 10, 2, new Date()));
+		
 		finish();
 	}
 }

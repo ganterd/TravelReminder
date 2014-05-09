@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.travelreminder"
+    package="com.ganterd.travelreminder"
     android:versionCode="1"
     android:versionName="1.0" >
 
@@ -9,6 +9,7 @@
         android:targetSdkVersion="19" />
     
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STROAGE"/>
+    <uses-permission android:name="android.permission.READ_INTERNAL_STROAGE"/>
 
     <application
         android:allowBackup="true"

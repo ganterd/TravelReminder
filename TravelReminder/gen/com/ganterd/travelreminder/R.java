@@ -5,7 +5,7 @@
  * should not be modified by hand.
  */
 
-package com.example.travelreminder;
+package com.ganterd.travelreminder;
 
 public final class R {
     public static final class array {

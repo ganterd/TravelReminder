@@ -2,6 +2,9 @@ package com.ganterd.travelreminder;
 
 import java.util.Date;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import com.ganterd.travelreminder.interfaces.IReminder;
 
 public class Reminder implements IReminder{
@@ -81,5 +84,38 @@ public class Reminder implements IReminder{
 	@Override
 	public int getReminderLeadTimeHours() {
 		return this.reminderLeadTimeHours;
+	}
+
+	@Override
+	public JSONObject toJSONObject() throws JSONException {
+		JSONObject j = new JSONObject();
+		
+		j.put("id", this.id);
+		j.put("name", this.name);
+		j.put("reminderLeadTimeHours", this.reminderLeadTimeHours);
+		j.put("reminderLeadTimeMinutes", this.reminderLeadTimeMinutes);
+		j.put("destinationTargetTime", this.destinationTargetTime.toString());
+
+		return j;
+	}
+
+	@Override
+	public String toJSONString() throws JSONException {
+		return this.toJSONObject().toString();
+	}
+
+	@Override
+	public void fromJSONObject(JSONObject obj) throws JSONException {
+		obj.get("id");
+		obj.get("name");
+		obj.get("reminderLeadTimeHours");
+		obj.get("reminderLeadTimeMinutes");
+		obj.get("destinationTargetTime");
+	}
+
+	@Override
+	public void fromJSONString(String jsonString) throws JSONException {
+		// TODO Auto-generated method stub
+		
 	}
 }
