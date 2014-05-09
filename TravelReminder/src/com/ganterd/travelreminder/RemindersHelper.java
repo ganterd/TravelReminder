@@ -15,21 +15,14 @@ import android.util.Log;
 
 public class RemindersHelper{
 	private static Context context;
-	private final static String fileName = "reminders";
-	
-	private static FileFilter reminderFilesFilter = new FileFilter() {
-        @Override
-        public boolean accept(File pathname) {
-           return pathname.getName().endsWith(".reminder");
-        }
-     };
+	private static final String fileExtension = ".reminder"; 
 	
 	public static void init(Context base) {
 		context = base;
 	}
 	
 	public static Reminder[] getAllReminders(){
-		File[] files = context.getFilesDir().listFiles(reminderFilesFilter);
+		File[] files = getAllReminderFiles();
 		
 		Reminder[] allReminders = new Reminder[files.length];
 		Log.d("RemindersHelper", "There are " + files.length + " files in internal storage");
@@ -53,7 +46,7 @@ public class RemindersHelper{
 	public static void saveReminder(Reminder reminder){
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			File f = new File(context.getFilesDir(), reminder.id + ".reminder");
+			File f = new File(context.getFilesDir(), reminder.id + fileExtension);
 			Log.i("RemindersHelper", "Saving reminder to " + f.getAbsolutePath());
 			mapper.writeValue(f, reminder);
 		} catch (JsonGenerationException e) {
@@ -66,7 +59,7 @@ public class RemindersHelper{
 	}
 	
 	public static Reminder getReminder(String reminderID){
-		File f = new File(context.getFilesDir(), reminderID);
+		File f = new File(context.getFilesDir(), reminderID + fileExtension);
 		
 		/* Return null if the file doesn't exist */
 		if(!f.isFile() || !f.canRead())
@@ -85,5 +78,23 @@ public class RemindersHelper{
 		}
 		
 		return null;
+	}
+
+	public static void deleteAllReminders() {
+		File[] files = getAllReminderFiles();
+		
+		for(File f : files){
+			f.delete();
+		}
+	}
+	
+	private static File[] getAllReminderFiles(){
+		File[] files = context.getFilesDir().listFiles(new FileFilter() {
+	        @Override
+	        public boolean accept(File pathname) {
+	           return pathname.getName().endsWith(fileExtension);
+	        }
+	     });
+		return files;
 	}
 }

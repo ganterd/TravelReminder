@@ -2,12 +2,11 @@ package com.ganterd.travelreminder;
 
 import java.util.Date;
 
-import com.ganterd.travelreminder.R;
-
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 // TODO: Add Google Maps Selection
@@ -34,7 +33,14 @@ public class CreateTravelReminderActivity extends Activity {
 	}
 	
 	public void createNewTravelReminder(View view){
-		RemindersHelper.saveReminder(new Reminder("testID", "ReminderName", 10, 2, new Date()));
+		Date d = new Date();
+		
+		String reminderID = d.toString().replace(" ", "");
+		
+		EditText editTextReminder = (EditText) findViewById(R.id.textReminderName);
+		String reminderName = editTextReminder.getText().toString();
+
+		RemindersHelper.saveReminder(new Reminder(reminderID, reminderName, 10, 2, new Date()));
 		
 		finish();
 	}

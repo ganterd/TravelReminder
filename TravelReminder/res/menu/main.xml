@@ -5,5 +5,6 @@
         android:orderInCategory="100"
         android:showAsAction="never"
         android:title="@string/action_settings"/>
+    <item android:id="@+id/action_delete_all_reminders" android:title="@string/menu_delete_all" android:onClick="actionDeleteAllReminders"></item>
 
 </menu>
