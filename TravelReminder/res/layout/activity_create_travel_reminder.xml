@@ -1,0 +1,81 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+	<LinearLayout 
+	    android:id="@+id/createTravelReminderLinearLayoutReminderName"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:orientation="horizontal"
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_vertical_margin"
+	    tools:context=".CreateTravelReminderActivity" >
+	
+	    <TextView
+	        android:id="@+id/textDescReminderName"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/text_create_reminder_desc_reminder_name"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+	    
+	    <EditText
+	        android:id="@+id/textReminderName"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:ems="10"
+	        android:hint="@string/text_create_reminder_reminder_name"
+	        android:inputType="textShortMessage" />
+	
+	</LinearLayout>
+
+	<LinearLayout
+	    android:id="@+id/createTravelReminderLinearLayoutReminderAlertTime"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentTop="false"
+	    android:layout_below="@id/createTravelReminderLinearLayoutReminderName"
+	    android:orientation="horizontal" 
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_list_vertical_margin">
+
+		<TextView
+	        android:id="@+id/textDescReminderAlertTime"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:text="@string/text_create_reminder_desc_reminder_alert_time"
+	        android:textAppearance="?android:attr/textAppearanceMedium" />
+		
+		<Spinner
+   			android:id="@+id/createTravelReminderAlertTimeSpinner"
+	        android:layout_weight="1"
+    		android:layout_width="0dp"
+    		android:layout_height="wrap_content" />
+
+	</LinearLayout>
+	
+	<LinearLayout
+	    android:id="@+id/createTravelReminderLinearLayoutReminderAlertCreate"
+	    android:layout_width="match_parent"
+	    android:layout_height="match_parent"
+	    android:layout_alignParentTop="false"
+	    android:layout_below="@id/createTravelReminderLinearLayoutReminderAlertTime"
+	    android:orientation="horizontal" 
+	    android:paddingLeft="@dimen/activity_horizontal_margin"
+	    android:paddingRight="@dimen/activity_horizontal_margin"
+	    android:paddingTop="@dimen/activity_list_vertical_margin">
+
+		<Button
+	        android:id="@+id/createTravelReminderButtonCreate"
+	        android:layout_width="0dp"
+	        android:layout_height="wrap_content"
+	        android:layout_weight="1"
+	        android:text="@string/button_create_new_travel_reminder_confirm" 
+	        android:onClick="createNewTravelReminder"/>
+
+	</LinearLayout>
+
+</RelativeLayout>
