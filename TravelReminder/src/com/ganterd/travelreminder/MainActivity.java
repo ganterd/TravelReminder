@@ -1,6 +1,7 @@
 package com.ganterd.travelreminder;
 
 import com.ganterd.travelreminder.R;
+import com.ganterd.travelreminder.adapters.MainActivityReminderListAdapter;
 
 import android.app.ListActivity;
 import android.content.Intent;
@@ -44,12 +45,17 @@ public class MainActivity extends ListActivity {
     	Reminder[] reminders = RemindersHelper.getAllReminders();
     	Log.d("MainActivity", "Listing " + reminders.length + " reminders.");
     	
-    	String[] values = new String[reminders.length];
+    	String[] titles = new String[reminders.length];
+    	String[] sub_titles = new String[reminders.length];
+    	boolean[] states = new boolean[reminders.length];
         for(int i = 0; i < reminders.length; i++){
-            values[i] = reminders[i].getReminderName();
+            titles[i] = reminders[i].getReminderName();
+            sub_titles[i] = reminders[i].getReminderLeadTimeHours() + ":" + reminders[i].getReminderLeadTimeMinutes();
+            states[i] = i % 2 == 0;
         }
-    	
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.main_reminders_row, values);
+        
+        
+        MainActivityReminderListAdapter adapter = new MainActivityReminderListAdapter(this, titles, sub_titles, states);
         setListAdapter(adapter);
     }
     
