@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <RelativeLayout
+        android:id="@+id/layoutReminderStartPoint"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin" >
+        
+        <TextView
+            android:id="@+id/textDescReminderStartPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textReminderStartPoint"
+            android:layout_alignTop="@+id/textReminderStartPoint"
+            android:gravity="center"
+            android:text="Start Point:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/textReminderStartPoint"
+	   		android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textDescReminderStartPoint"
+            android:ems="10"
+            android:hint="Start Point"
+            android:inputType="textShortMessage" />
+
+        <TextView
+            android:id="@+id/textDescReminderEndPoint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/textReminderEndPoint"
+            android:layout_alignTop="@+id/textReminderEndPoint"
+            android:gravity="center"
+            android:text="End Point:"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <EditText
+            android:id="@+id/textReminderEndPoint"
+        	android:layout_below="@+id/textReminderStartPoint"
+	   		android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/textDescReminderEndPoint"
+            android:ems="10"
+            android:hint="End Point"
+            android:inputType="textShortMessage" />
+        
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/mapReminder"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/layoutReminderStartPoint" />
+
+</RelativeLayout>

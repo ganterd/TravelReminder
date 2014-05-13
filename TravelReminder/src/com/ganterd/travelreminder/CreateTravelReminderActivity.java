@@ -1,28 +1,30 @@
 package com.ganterd.travelreminder;
 
-import java.util.Date;
-
-import android.app.Activity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.Spinner;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.view.ViewPager;
+
+import com.ganterd.travelreminder.fragments.ReminderEditFragment;
+import com.ganterd.travelreminder.fragments.ReminderEditLocationInfo;
 
 // TODO: Add Google Maps Selection
-public class CreateTravelReminderActivity extends Activity {
+public class CreateTravelReminderActivity extends FragmentActivity {
+	CreateTravelReminderPagerAdapter pagerAdapter;
+	ViewPager viewPager;
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_create_travel_reminder);
+		
+		pagerAdapter = new CreateTravelReminderPagerAdapter(getSupportFragmentManager());
+		viewPager = (ViewPager) findViewById(R.id.pager);
+		viewPager.setAdapter(pagerAdapter);
 
 		setupActionBar();
-		
-		Spinner spinner = (Spinner) findViewById(R.id.createTravelReminderAlertTimeSpinner);
-		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-		        R.array.array_alert_lead_times, android.R.layout.simple_spinner_item);
-		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-		spinner.setAdapter(adapter);
 	}
 
 	/**
@@ -31,17 +33,37 @@ public class CreateTravelReminderActivity extends Activity {
 	private void setupActionBar() {
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 	}
-	
-	public void createNewTravelReminder(View view){
-		Date d = new Date();
-		
-		String reminderID = d.toString().replace(" ", "");
-		
-		EditText editTextReminder = (EditText) findViewById(R.id.textReminderName);
-		String reminderName = editTextReminder.getText().toString();
 
-		RemindersHelper.saveReminder(new Reminder(reminderID, reminderName, 10, 2, new Date()));
-		
-		finish();
+	/**
+	 * Class that handles the pager adapter
+	 * 
+	 * @author I072979
+	 */
+	public class CreateTravelReminderPagerAdapter extends FragmentStatePagerAdapter {
+	    public CreateTravelReminderPagerAdapter(FragmentManager fm) {
+	        super(fm);
+	    }
+
+	    @Override
+	    public Fragment getItem(int i) {
+	        switch (i) {
+			case 0:
+				return new ReminderEditFragment();
+			case 1:
+				return new ReminderEditLocationInfo();
+			default:
+				return null;
+			}
+	    }
+
+	    @Override
+	    public int getCount() {
+	        return 2;
+	    }
+
+	    @Override
+	    public CharSequence getPageTitle(int position) {
+	        return "OBJECT " + (position + 1);
+	    }
 	}
 }
