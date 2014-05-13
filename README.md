@@ -13,5 +13,12 @@ The app also should take traffic into account through GoogleMaps if a data conne
 ### Travel Lead Time
 The app should also allow the user to set a lead time for the alert. For example, instead of the reminder going off when the user should leave, the user should be allowed to specify that the reminder should go off 10 minutes (or some arbitrary time) before.
 
+## Possible Issues
+### Quotas
+Although use of the Google Maps data, i.e the actual maps, is free, the use of the *directions* API is free but only to a certain extent. The free directions API has quotas of 2,500 per day, with public transit directions using up 4 units of quota. This information can be found (here)[https://developers.google.com/maps/documentation/directions/#Limits].
+
+### Traffic Data
+Another issue with using Google's direction API is that traffic seems to only be accounted for in the Google Maps for Business API. See "departure_time" under "Optional Parameters" on (this webpage)[https://developers.google.com/maps/documentation/directions/#RequestParameters]
+
 ## Disclaimer
 I have no idea what I'm doing, so bear with me...
