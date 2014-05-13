@@ -8,6 +8,9 @@
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
     
+    <meta-data android:name="com.google.android.gms.version"
+           android:value="@integer/google_play_services_version" />
+    
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STROAGE"/>
     <uses-permission android:name="android.permission.READ_INTERNAL_STROAGE"/>
 
