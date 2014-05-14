@@ -47,14 +47,16 @@ public class MainActivity extends ListActivity {
     	String[] titles = new String[reminders.length];
     	String[] sub_titles = new String[reminders.length];
     	boolean[] states = new boolean[reminders.length];
+    	String[] ids = new String[reminders.length];
         for(int i = 0; i < reminders.length; i++){
             titles[i] = reminders[i].getReminderName();
             sub_titles[i] = reminders[i].getReminderLeadTimeHours() + ":" + reminders[i].getReminderLeadTimeMinutes();
-            states[i] = i % 2 == 0;
+            states[i] = true;
+            ids[i] = reminders[i].id;
         }
         
         
-        MainActivityReminderListAdapter adapter = new MainActivityReminderListAdapter(this, titles, sub_titles, states);
+        MainActivityReminderListAdapter adapter = new MainActivityReminderListAdapter(this, titles, sub_titles, states, ids);
         setListAdapter(adapter);
     }
     

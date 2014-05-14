@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.FileFilter;
 import java.io.IOException;
 
+import android.content.Context;
+import android.util.Log;
+
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import android.content.Context;
-import android.util.Log;
 
 
 public class RemindersHelper{
@@ -44,9 +44,21 @@ public class RemindersHelper{
 	}
 	
 	public static void saveReminder(Reminder reminder){
+		File existingFile = new File(context.getFilesDir(), reminder.id + fileExtension);
+		
+		if(existingFile.isFile() && existingFile.canRead()){
+			Log.i("RemindersHelper", "Deleting existing reminder file " + existingFile.getAbsolutePath());
+			existingFile.delete();
+		}
+		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			File f = new File(context.getFilesDir(), reminder.id + fileExtension);
+			
+			if(f.isFile()){
+				f.delete();
+			}
+			
 			Log.i("RemindersHelper", "Saving reminder to " + f.getAbsolutePath());
 			mapper.writeValue(f, reminder);
 		} catch (JsonGenerationException e) {

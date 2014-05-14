@@ -24,7 +24,7 @@
     <string name="PLACEHOLDER_main_reminders_row_reminder_details">REMINDER_DETAILS</string>
     
     <!-- Main Activity -->
-    <string name="button_create_new_travel_reminder_confirm">Add Reminder</string>
+    <string name="button_create_new_travel_reminder_confirm">Save Reminder</string>
     <string name="menu_delete_all">Delete All Reminders</string>
     
     <!-- REMINDER DETAILS EDIT ACTIVITY -->

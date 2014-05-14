@@ -1,9 +1,7 @@
 package com.ganterd.travelreminder.fragments;
 
-import java.util.Date;
-
-import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +12,29 @@ import android.widget.Spinner;
 
 import com.ganterd.travelreminder.R;
 import com.ganterd.travelreminder.Reminder;
-import com.ganterd.travelreminder.RemindersHelper;
 
 public class ReminderEditFragment extends Fragment {
+	public static final String ARG_EXISTING_REMINDER_NAME = "ARG_EXISTING_REMINDER_NAME";
+	public static final String ARG_EXISTING_REMINDER_LEAD_TIME = "ARG_EXISTING_REMINDER_LEAD_TIME";
+	
+	Reminder existingReminder = null;
+	
+	public static ReminderEditFragment newInstance(Reminder existingReminder){
+		ReminderEditFragment f = new ReminderEditFragment();
+		
+		if(existingReminder != null){
+			Bundle args = new Bundle();
+			args.putString(ReminderEditFragment.ARG_EXISTING_REMINDER_NAME, existingReminder.getReminderName());
+			f.setArguments(args);
+		}
+		
+		return f;
+	}
+	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		Bundle args = getArguments();
+		
 		RelativeLayout rl = (RelativeLayout)inflater.inflate(R.layout.reminder_details, container, false);
 		
 		Spinner spinner = (Spinner) rl.findViewById(R.id.createTravelReminderAlertTimeSpinner);
@@ -27,19 +43,11 @@ public class ReminderEditFragment extends Fragment {
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		spinner.setAdapter(adapter);
 		
+		if(args != null){
+			EditText reminderNameInput = (EditText) rl.findViewById(R.id.textReminderName);
+			reminderNameInput.setText(args.getString(ARG_EXISTING_REMINDER_NAME));
+		}
+		
 		return rl;
-	}
-	
-	public void createNewTravelReminder(View view){
-		Date d = new Date();
-		
-		String reminderID = d.toString().replace(" ", "");
-		
-		EditText editTextReminder = (EditText) getActivity().findViewById(R.id.textReminderName);
-		String reminderName = editTextReminder.getText().toString();
-
-		RemindersHelper.saveReminder(new Reminder(reminderID, reminderName, 10, 2, new Date()));
-		
-		getActivity().finish();
 	}
 }
