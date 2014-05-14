@@ -47,12 +47,12 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 	    @Override
 	    public Fragment getItem(int i) {
 	        switch (i) {
-			case 0:
-				return new ReminderEditFragment();
-			case 1:
-				return new ReminderEditLocationInfo();
-			default:
-				return null;
+				case 0:
+					return new ReminderEditFragment();
+				case 1:
+					return new ReminderEditLocationInfo();
+				default:
+					return null;
 			}
 	    }
 
@@ -63,7 +63,19 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 
 	    @Override
 	    public CharSequence getPageTitle(int position) {
-	        return "OBJECT " + (position + 1);
+	    	int stringID = 0;
+	    	switch (position) {
+				case 0:
+					stringID = R.string.reminder_details_tab_title_details;
+					break;
+				case 1:
+					stringID = R.string.reminder_details_tab_title_location_info;
+					break;
+				default:
+					return "";
+			}
+	    	
+	    	return getResources().getString(stringID);
 	    }
 	}
 }

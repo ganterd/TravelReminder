@@ -5,9 +5,6 @@
     <string name="action_settings">Settings</string>
     <string name="button_create_new_travel_reminder">+</string>
     <string name="title_activity_create_travel_reminder">Create Travel Reminder</string>
-    <string name="text_create_reminder_reminder_name">Reminder Name</string>
-    <string name="text_create_reminder_desc_reminder_name">Name:</string>
-    <string name="text_create_reminder_desc_reminder_alert_time">Leading Time:</string>
 
     <string-array name="array_alert_lead_times">
         <item>0 Minutes</item>
@@ -29,6 +26,15 @@
     <!-- Main Activity -->
     <string name="button_create_new_travel_reminder_confirm">Add Reminder</string>
     <string name="menu_delete_all">Delete All Reminders</string>
+    
+    <!-- REMINDER DETAILS EDIT ACTIVITY -->
+    <!-- Tab Titles -->
+    <string name="reminder_details_tab_title_details">DETAILS</string>
+    <string name="reminder_details_tab_title_location_info">LOCATIONS</string>
+    
+    <string name="text_create_reminder_reminder_name">Reminder Name</string>
+    <string name="text_create_reminder_desc_reminder_name">Name:</string>
+    <string name="text_create_reminder_desc_reminder_alert_time">Leading Time:</string>
     
     <!-- Reminder Details Location Info -->
     <string name="reminder_details_location_label_start_point">From:</string>
