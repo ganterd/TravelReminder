@@ -20,7 +20,7 @@
             android:layout_alignBottom="@+id/textReminderStartPoint"
             android:layout_alignTop="@+id/textReminderStartPoint"
             android:gravity="center"
-            android:text="Start Point:"
+            android:text="@string/reminder_details_location_label_start_point"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/textDescReminderStartPoint"
             android:ems="10"
-            android:hint="Start Point"
+            android:hint="@string/reminder_details_location_hint_start_point"
             android:inputType="textShortMessage" />
 
         <TextView
@@ -39,7 +39,7 @@
             android:layout_alignBottom="@+id/textReminderEndPoint"
             android:layout_alignTop="@+id/textReminderEndPoint"
             android:gravity="center"
-            android:text="End Point:"
+            android:text="@string/reminder_details_location_label_end_point"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
@@ -49,7 +49,7 @@
             android:layout_height="wrap_content"
             android:layout_toRightOf="@+id/textDescReminderEndPoint"
             android:ems="10"
-            android:hint="End Point"
+            android:hint="@string/reminder_details_location_hint_end_point"
             android:inputType="textShortMessage" />
         
     </RelativeLayout>

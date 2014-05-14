@@ -8,6 +8,7 @@
     <string name="text_create_reminder_reminder_name">Reminder Name</string>
     <string name="text_create_reminder_desc_reminder_name">Name:</string>
     <string name="text_create_reminder_desc_reminder_alert_time">Leading Time:</string>
+
     <string-array name="array_alert_lead_times">
         <item>0 Minutes</item>
         <item>1 Minutes</item>
@@ -20,7 +21,19 @@
         <item>45 Minutes</item>
         <item>60 Minutes</item>
     </string-array>
+
+    <!-- Main Reminders Row -->
+    <string name="PLACEHOLDER_main_reminders_row_reminder_name">REMINDER_NAME</string>
+    <string name="PLACEHOLDER_main_reminders_row_reminder_details">REMINDER_DETAILS</string>
+    
+    <!-- Main Activity -->
     <string name="button_create_new_travel_reminder_confirm">Add Reminder</string>
     <string name="menu_delete_all">Delete All Reminders</string>
+    
+    <!-- Reminder Details Location Info -->
+    <string name="reminder_details_location_label_start_point">From:</string>
+    <string name="reminder_details_location_label_end_point">To:</string>
+    <string name="reminder_details_location_hint_start_point">Start Point</string>
+    <string name="reminder_details_location_hint_end_point">End Point</string>
 
 </resources>

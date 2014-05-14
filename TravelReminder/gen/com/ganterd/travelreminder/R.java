@@ -271,6 +271,10 @@ containing a value of this type.
         public static final int main=0x7f0b0002;
     }
     public static final class string {
+        public static final int PLACEHOLDER_main_reminders_row_reminder_details=0x7f060023;
+        /**  Main Reminders Row 
+         */
+        public static final int PLACEHOLDER_main_reminders_row_reminder_name=0x7f060022;
         public static final int action_settings=0x7f06001c;
         public static final int app_name=0x7f06001b;
         /**   Title for notification shown when GooglePlayServices needs to be
@@ -297,7 +301,7 @@ containing a value of this type.
          */
         public static final int auth_client_using_bad_version_title=0x7f060014;
         public static final int button_create_new_travel_reminder=0x7f06001d;
-        public static final int button_create_new_travel_reminder_confirm=0x7f060022;
+        public static final int button_create_new_travel_reminder_confirm=0x7f060024;
         /**  Button in confirmation dialog to enable Google Play services.  Clicking it
         will direct user to application settings of Google Play services where they
         can enable it [CHAR LIMIT=40] 
@@ -372,7 +376,13 @@ containing a value of this type.
         /**  Location client code resources (prefix with location_client) 
          */
         public static final int location_client_powered_by_google=0x7f06001a;
-        public static final int menu_delete_all=0x7f060023;
+        public static final int menu_delete_all=0x7f060025;
+        public static final int reminder_details_location_hint_end_point=0x7f060029;
+        public static final int reminder_details_location_hint_start_point=0x7f060028;
+        public static final int reminder_details_location_label_end_point=0x7f060027;
+        /**  Reminder Details Location Info 
+         */
+        public static final int reminder_details_location_label_start_point=0x7f060026;
         public static final int text_create_reminder_desc_reminder_alert_time=0x7f060021;
         public static final int text_create_reminder_desc_reminder_name=0x7f060020;
         public static final int text_create_reminder_reminder_name=0x7f06001f;

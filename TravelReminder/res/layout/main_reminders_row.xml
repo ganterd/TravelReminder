@@ -20,7 +20,7 @@
 	    android:layout_height="wrap_content"
 	    android:layout_toLeftOf="@id/reminderOnOffSwitch"
 	    android:paddingTop="5dp"
-	    android:text="Reminder Name"
+	    android:text="@string/PLACEHOLDER_main_reminders_row_reminder_name"
 	    android:textSize="20sp"
 	    android:textStyle="bold" />
 	
@@ -29,7 +29,7 @@
 	    android:layout_width="fill_parent"
 	    android:layout_height="wrap_content"
 	    android:layout_below="@+id/reminderTitle"
-	    android:text="Reminder Details"
+	    android:text="@string/PLACEHOLDER_main_reminders_row_reminder_details"
 	    android:textSize="12sp"
 	    android:paddingBottom="5dp"
     	android:paddingTop="5dp" />
