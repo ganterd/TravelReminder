@@ -6,6 +6,7 @@ import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.ganterd.travelreminder.R;
@@ -13,6 +14,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.UiSettings;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -22,9 +24,13 @@ public class ReminderEditLocationInfo extends Fragment {
 	private GoogleMap map;
 	private GoogleMapOptions mapOptions = new GoogleMapOptions();
 	
-	private GoogleMap.OnMapLongClickListener longClickListener = new GoogleMap.OnMapLongClickListener() {
+	private LatLng origin = null;
+	private LatLng destination = null;
+	
+	private GoogleMap.OnMapClickListener clickListener = new GoogleMap.OnMapClickListener() {
 		@Override
-		public void onMapLongClick(LatLng arg0) {
+		public void onMapClick(LatLng arg0) {
+			setPosition(arg0);
 		}
 	};
 	
@@ -62,8 +68,27 @@ public class ReminderEditLocationInfo extends Fragment {
 	        uiSettings.setCompassEnabled(true);
 	        uiSettings.setZoomControlsEnabled(false);
 	        
-	        map.setOnMapLongClickListener(longClickListener);
-	        map.addMarker(new MarkerOptions().position(new LatLng(0, 0)));
+	        map.setOnMapClickListener(clickListener);
 	    }
+	}
+	
+	public void drawMarkers(){
+		map.clear();
+		
+		if(origin != null)
+			map.addMarker(new MarkerOptions().position(origin).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)));
+		
+		if(destination != null)
+			map.addMarker(new MarkerOptions().position(destination).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE)));
+	}
+	
+	public void setPosition(LatLng p){
+		if(((EditText)getView().findViewById(R.id.textReminderStartPoint)).hasFocus()){
+			origin = p;
+		}else if(((EditText)getView().findViewById(R.id.textReminderEndPoint)).hasFocus()){
+			destination = p;
+		}
+		
+		drawMarkers();
 	}
 }
