@@ -39,7 +39,7 @@
     <!-- Reminder Details Location Info -->
     <string name="reminder_details_location_label_start_point">From:</string>
     <string name="reminder_details_location_label_end_point">To:</string>
-    <string name="reminder_details_location_hint_start_point">Start Point</string>
-    <string name="reminder_details_location_hint_end_point">End Point</string>
+    <string name="reminder_details_location_hint_start_point">Select Point on Map</string>
+    <string name="reminder_details_location_hint_end_point">Select Point on Map</string>
 
 </resources>
