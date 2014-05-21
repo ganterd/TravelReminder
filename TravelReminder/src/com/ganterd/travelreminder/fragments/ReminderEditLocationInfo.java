@@ -1,5 +1,7 @@
 package com.ganterd.travelreminder.fragments;
 
+import java.text.DecimalFormat;
+
 import org.json.JSONObject;
 
 import android.os.Bundle;
@@ -13,8 +15,10 @@ import android.widget.EditText;
 import android.widget.RelativeLayout;
 
 import com.ganterd.travelreminder.Directions;
+import com.ganterd.travelreminder.Reminder;
 import com.ganterd.travelreminder.Directions.OnDirectionsReadyListener;
 import com.ganterd.travelreminder.R;
+import com.ganterd.travelreminder.RemindersHelper;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.GoogleMapOptions;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -26,15 +30,18 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 public class ReminderEditLocationInfo extends Fragment implements OnDirectionsReadyListener{
+	public static final String ARG_EXISTING_REMINDER = "ARG_EXISTING_REMINDER";
+	
 	private SupportMapFragment mapFragment;
 	private GoogleMap map;
 	private GoogleMapOptions mapOptions = new GoogleMapOptions();
+	
+	private Reminder existingReminder = null;
 	
 	private LatLng origin = null;
 	private LatLng destination = null;
 	
 	private PolylineOptions path = null;
-	
 	private Directions directions = new Directions();
 	
 	private GoogleMap.OnMapClickListener clickListener = new GoogleMap.OnMapClickListener() {
@@ -43,6 +50,25 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 			setPosition(arg0);
 		}
 	};
+	
+	/**
+	 * Create a new instance of the ReminderEditLocationInfo fragment by passing an existing
+	 * reminder.
+	 * 
+	 * @param existingReminder
+	 * @return
+	 */
+	public static ReminderEditLocationInfo newInstance(Reminder existingReminder){
+		ReminderEditLocationInfo f = new ReminderEditLocationInfo();
+		
+		if(existingReminder != null){
+			Bundle args = new Bundle();
+			args.putSerializable(ReminderEditLocationInfo.ARG_EXISTING_REMINDER, existingReminder);
+			f.setArguments(args);
+		}
+		
+		return f;
+	}
 	
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -56,6 +82,16 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 		
 		EditText endPointInput = (EditText) rl.findViewById(R.id.textReminderEndPoint);
 		endPointInput.setInputType(EditorInfo.TYPE_NULL);
+		
+		Bundle args = getArguments();
+		if(args != null){
+			this.existingReminder = (Reminder)args.getSerializable(ARG_EXISTING_REMINDER);
+		}
+		
+		if(this.existingReminder != null){
+			this.origin = this.existingReminder.getOriginLatLng();
+			this.destination = this.existingReminder.getDestinationLatLng();
+		}
 		
 		return rl;
 	}
@@ -87,6 +123,19 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 	        
 	        map.setOnMapClickListener(clickListener);
 	    }
+	    
+	    updateTextFields();
+	    drawMarkers();
+	    drawPath();
+	}
+	
+	public void updateTextFields(){
+		EditText startPointInput = (EditText) getView().findViewById(R.id.textReminderStartPoint);
+		EditText endPointInput = (EditText) getView().findViewById(R.id.textReminderEndPoint);
+		
+		DecimalFormat df = new DecimalFormat("#.####");
+		startPointInput.setText(df.format(this.origin.latitude) + ", " + df.format(this.origin.longitude));
+		endPointInput.setText(df.format(this.destination.latitude) + ", " + df.format(this.destination.longitude));
 	}
 	
 	public void drawMarkers(){
@@ -118,9 +167,19 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 		if(originInput.hasFocus()){
 			origin = p;
 			originInput.setText(origin.toString());
+
+			if(this.existingReminder != null){
+				this.existingReminder.setOriginLatLng(this.origin);
+				RemindersHelper.saveReminder(this.existingReminder);
+			}
 		}else if(destinationInput.hasFocus()){
 			destination = p;
 			destinationInput.setText(destination.toString());
+			
+			if(this.existingReminder != null){
+				this.existingReminder.setDestinationLatLng(this.destination);
+				RemindersHelper.saveReminder(this.existingReminder);
+			}
 		}
 		
 		if(origin != null && destination != null){
@@ -130,6 +189,7 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 			directions.requestDirections(this);
 		}
 		
+		updateTextFields();
 		drawMarkers();
 	}
 }

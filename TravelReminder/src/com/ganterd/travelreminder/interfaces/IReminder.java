@@ -1,7 +1,6 @@
 package com.ganterd.travelreminder.interfaces;
 
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.google.android.gms.maps.model.LatLng;
 
 public interface IReminder {
 	public void setReminderID(String newID);
@@ -12,6 +11,14 @@ public interface IReminder {
 	
 	public void setReminderLeadTimeHours(int hours);
 	
+	public void setOrigin(double[] o);
+	
+	public void setOriginLatLng(LatLng o);
+	
+	public void setDestination(double[] d);
+	
+	public void setDestinationLatLng(LatLng d);
+	
 	public String getReminderID();
 	
 	public String getReminderName();
@@ -20,11 +27,11 @@ public interface IReminder {
 	
 	public int getReminderLeadTimeHours();
 	
-	public JSONObject toJSONObject() throws JSONException;
+	public double[] getOrigin();
 	
-	public String toJSONString() throws JSONException;
+	public LatLng getOriginLatLng();
 	
-	public void fromJSONObject(JSONObject obj) throws JSONException;
+	public double[] getDestination();
 	
-	public void fromJSONString(String jsonString) throws JSONException;
+	public LatLng getDestinationLatLng();
 }

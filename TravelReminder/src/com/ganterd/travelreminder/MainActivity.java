@@ -49,10 +49,14 @@ public class MainActivity extends ListActivity {
     	boolean[] states = new boolean[reminders.length];
     	String[] ids = new String[reminders.length];
         for(int i = 0; i < reminders.length; i++){
+        	if(reminders[i] == null){
+        		Log.e("MainActivity", "For some reason one of the loaded reminders is null");
+        		continue;
+        	}
             titles[i] = reminders[i].getReminderName();
             sub_titles[i] = reminders[i].getReminderLeadTimeHours() + ":" + reminders[i].getReminderLeadTimeMinutes();
             states[i] = true;
-            ids[i] = reminders[i].id;
+            ids[i] = reminders[i].getReminderID();
         }
         
         

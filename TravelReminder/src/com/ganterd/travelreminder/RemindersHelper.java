@@ -44,7 +44,7 @@ public class RemindersHelper{
 	}
 	
 	public static void saveReminder(Reminder reminder){
-		File existingFile = new File(context.getFilesDir(), reminder.id + fileExtension);
+		File existingFile = new File(context.getFilesDir(), reminder.getReminderID() + fileExtension);
 		
 		if(existingFile.isFile() && existingFile.canRead()){
 			Log.i("RemindersHelper", "Deleting existing reminder file " + existingFile.getAbsolutePath());
@@ -53,7 +53,7 @@ public class RemindersHelper{
 		
 		ObjectMapper mapper = new ObjectMapper();
 		try {
-			File f = new File(context.getFilesDir(), reminder.id + fileExtension);
+			File f = new File(context.getFilesDir(), reminder.getReminderID() + fileExtension);
 			
 			if(f.isFile()){
 				f.delete();

@@ -1,18 +1,21 @@
 package com.ganterd.travelreminder;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ganterd.travelreminder.interfaces.IReminder;
+import com.google.android.gms.maps.model.LatLng;
 
-public class Reminder implements IReminder{
+@SuppressWarnings("serial")
+public class Reminder implements IReminder, Serializable{
 	String name = null;
 	int reminderLeadTimeMinutes = 0;
 	int reminderLeadTimeHours = 0;
 	Date destinationTargetTime = null;
 	String id = null;
+	double[] origin = new double[2];
+	double[] destination = new double[2];
 
 	/**
 	 * Default constructor. Sets most things to empty values except the destination target time
@@ -87,35 +90,48 @@ public class Reminder implements IReminder{
 	}
 
 	@Override
-	public JSONObject toJSONObject() throws JSONException {
-		JSONObject j = new JSONObject();
-		
-		j.put("id", this.id);
-		j.put("name", this.name);
-		j.put("reminderLeadTimeHours", this.reminderLeadTimeHours);
-		j.put("reminderLeadTimeMinutes", this.reminderLeadTimeMinutes);
-		j.put("destinationTargetTime", this.destinationTargetTime.toString());
-
-		return j;
+	public void setOrigin(double[] o){
+		this.origin = o;
+	}
+	
+	@Override
+	@JsonIgnore
+	public void setOriginLatLng(LatLng o) {
+		this.origin[0] = o.latitude;
+		this.origin[1] = o.longitude;
+	}
+	
+	@Override
+	public void setDestination(double[] d){
+		this.destination = d;
 	}
 
 	@Override
-	public String toJSONString() throws JSONException {
-		return this.toJSONObject().toString();
+	@JsonIgnore
+	public void setDestinationLatLng(LatLng d) {
+		this.destination[0] = d.latitude;
+		this.destination[1] = d.longitude;
+	}
+	
+	@Override
+	public double[] getOrigin(){
+		return this.origin;
 	}
 
 	@Override
-	public void fromJSONObject(JSONObject obj) throws JSONException {
-		obj.get("id");
-		obj.get("name");
-		obj.get("reminderLeadTimeHours");
-		obj.get("reminderLeadTimeMinutes");
-		obj.get("destinationTargetTime");
+	@JsonIgnore
+	public LatLng getOriginLatLng() {
+		return new LatLng(this.origin[0], this.origin[1]);
+	}
+	
+	@Override
+	public double[] getDestination(){
+		return this.destination;
 	}
 
 	@Override
-	public void fromJSONString(String jsonString) throws JSONException {
-		// TODO Auto-generated method stub
-		
+	@JsonIgnore
+	public LatLng getDestinationLatLng() {
+		return new LatLng(this.destination[0], this.destination[1]);
 	}
 }

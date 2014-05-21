@@ -89,7 +89,7 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 				case 0:
 					return ReminderEditFragment.newInstance(existingReminder);
 				case 1:
-					return new ReminderEditLocationInfo();
+					return ReminderEditLocationInfo.newInstance(existingReminder);
 				default:
 					return null;
 			}
