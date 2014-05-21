@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:ems="10"
             android:hint="@string/text_create_reminder_reminder_name"
-            android:inputType="textShortMessage" />
+            android:inputType="textShortMessage|textCapSentences" />
     </LinearLayout>
 
     <LinearLayout

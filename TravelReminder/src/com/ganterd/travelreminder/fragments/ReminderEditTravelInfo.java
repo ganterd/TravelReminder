@@ -1,10 +1,16 @@
 package com.ganterd.travelreminder.fragments;
 
+import java.text.SimpleDateFormat;
+
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -16,7 +22,7 @@ import com.ganterd.travelreminder.R;
 import com.ganterd.travelreminder.Reminder;
 import com.ganterd.travelreminder.RemindersHelper;
 
-public class ReminderEditTravelInfo extends Fragment {
+public class ReminderEditTravelInfo extends Fragment implements ReminderEditArrivalTimePickerFragment.OnArrivalTimeUpdatedListener{
 	public static final String ARG_EXISTING_REMINDER = "ARG_EXISTING_REMINDER";
 	
 	/* Variables */
@@ -54,6 +60,15 @@ public class ReminderEditTravelInfo extends Fragment {
 		
 		RelativeLayout rl = (RelativeLayout)inflater.inflate(R.layout.reminder_edit_travel_info, container, false);
 		
+		EditText arrivalTimeEditText = (EditText) rl.findViewById(R.id.reminder_edit_travel_info_arrival_time);
+		arrivalTimeEditText.setInputType(EditorInfo.TYPE_NULL);
+		arrivalTimeEditText.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				showTimePickerDialog(getView());
+			}
+		});
+		
 		/* Set the options in the travel mode spinner */
 		Spinner travelModeSpinner = (Spinner) rl.findViewById(R.id.reminder_edit_travel_info_mode);
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(getActivity(),
@@ -73,10 +88,24 @@ public class ReminderEditTravelInfo extends Fragment {
 	    }
 	}
 	
+	public void showTimePickerDialog(View v){
+		ReminderEditArrivalTimePickerFragment timePicker = ReminderEditArrivalTimePickerFragment.newInstance(this.reminder);
+		timePicker.setListener(this);
+		timePicker.show(getFragmentManager(), "timePicker");
+	}
+	
 	public void updateFragment(){
 		this.reminder = RemindersHelper.getReminder(reminder.getReminderID());
 		
+		EditText arrivalTimeEditText = (EditText) getView().findViewById(R.id.reminder_edit_travel_info_arrival_time);
+		arrivalTimeEditText.setText(DateFormat.getTimeFormat(getActivity()).format(reminder.getArrivalTime().getTime()));
+		
 		Spinner travelModeSpinner = (Spinner) getView().findViewById(R.id.reminder_edit_travel_info_mode);
 		travelModeSpinner.setSelection(this.reminder.getTravelMode());
+	}
+
+	@Override
+	public void newTimeSelected() {
+		updateFragment();
 	}
 }

@@ -1,7 +1,7 @@
 package com.ganterd.travelreminder;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.util.Calendar;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.ganterd.travelreminder.interfaces.IReminder;
@@ -14,13 +14,13 @@ public class Reminder implements IReminder, Serializable{
 	public static final int MODE_CYCLING = 2;
 	public static final int MODE_PUBLIC_TRANSIT = 3;
 	
-	String name = null;
-	int reminderLeadTimeMinutes = 0;
-	int reminderLeadTimeHours = 0;
-	Date destinationTargetTime = null;
-	String id = null;
-	double[] origin = new double[2];
-	double[] destination = new double[2];
+	private String name = null;
+	private int reminderLeadTimeMinutes = 0;
+	private int reminderLeadTimeHours = 0;
+	private Calendar destinationTargetTime = null;
+	private String id = null;
+	private double[] origin = new double[2];
+	private double[] destination = new double[2];
 	private int travelMode = 0; 
 
 	/**
@@ -30,7 +30,8 @@ public class Reminder implements IReminder, Serializable{
 	public Reminder() {
 		this.name = "";
 		this.id = "";
-		this.destinationTargetTime = new Date();
+		this.destinationTargetTime = Calendar.getInstance();
+		this.destinationTargetTime.setTimeInMillis(0);
 	}
 
 	/**
@@ -41,7 +42,7 @@ public class Reminder implements IReminder, Serializable{
 	 * @param leadTimeHours The reminder lead time in hours.
 	 * @param targetTime The reminder destination target time.
 	 */
-	public Reminder(String id, String name, int leadTimeMinutes, int leadTimeHours, Date targetTime) {
+	public Reminder(String id, String name, int leadTimeMinutes, int leadTimeHours, Calendar targetTime) {
 		this.id = id;
 		this.name = name;
 		this.setReminderLeadTimeHours(leadTimeHours);
@@ -147,5 +148,34 @@ public class Reminder implements IReminder, Serializable{
 	
 	public int getTravelMode(){
 		return this.travelMode;
+	}
+
+	@Override
+	public void setArrivalTime(Calendar t) {
+		this.destinationTargetTime = t;
+	}
+
+	@Override
+	public Calendar getArrivalTime() {
+		return this.destinationTargetTime;
+	}
+
+	@Override
+	@JsonIgnore
+	public void setArrivalTime(int hourOfDay, int minutes) {
+		this.destinationTargetTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+		this.destinationTargetTime.set(Calendar.MINUTE, minutes);
+	}
+
+	@Override
+	@JsonIgnore
+	public int getArrivalTimeHour() {
+		return this.destinationTargetTime.get(Calendar.HOUR_OF_DAY);
+	}
+
+	@Override
+	@JsonIgnore
+	public int getArrivalTimeMinutes() {
+		return this.destinationTargetTime.get(Calendar.MINUTE);
 	}
 }

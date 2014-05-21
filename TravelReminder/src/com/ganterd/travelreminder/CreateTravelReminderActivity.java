@@ -1,5 +1,6 @@
 package com.ganterd.travelreminder;
 
+import java.util.Calendar;
 import java.util.Date;
 
 import android.content.Intent;
@@ -65,7 +66,7 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 			Date d = new Date();
 			String reminderID = d.toString().replace(" ", "");
 			
-			RemindersHelper.saveReminder(new Reminder(reminderID, reminderName, 10, 2, new Date()));
+			RemindersHelper.saveReminder(new Reminder(reminderID, reminderName, 10, 2, Calendar.getInstance()));
 		}
 		
 		finish();
@@ -74,7 +75,7 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 	/**
 	 * Class that handles the pager adapter
 	 * 
-	 * @author I072979
+	 * @author David Ganter
 	 */
 	public class CreateTravelReminderPagerAdapter extends FragmentStatePagerAdapter {
 		Reminder existingReminder = null;

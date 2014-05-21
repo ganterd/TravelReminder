@@ -25,8 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/reminder_edit_travel_info_mode_label"
         android:ems="10"
-        android:hint="@string/reminder_details_location_hint_start_point"
-        android:inputType="textShortMessage" />
+        android:hint="@string/reminder_details_location_hint_start_point" />
 
     <TextView
         android:id="@+id/reminder_edit_travel_info_arrival_time_label"
@@ -40,13 +39,12 @@
 
     <EditText
         android:id="@+id/reminder_edit_travel_info_arrival_time"
-    	android:layout_below="@+id/reminder_edit_travel_info_mode"
-		android:layout_width="fill_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/reminder_edit_travel_info_mode"
         android:layout_toRightOf="@+id/reminder_edit_travel_info_arrival_time_label"
         android:ems="10"
-        android:hint="@string/reminder_details_location_hint_end_point"
-        android:inputType="textShortMessage" />
+        android:inputType="none" />
     
     <TextView
         android:id="@+id/reminder_edit_travel_info_recurring_label"
@@ -65,7 +63,6 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/reminder_edit_travel_info_recurring_label"
         android:ems="10"
-        android:hint="@string/reminder_details_location_hint_end_point"
-        android:inputType="textShortMessage" />
+        android:inputType="none" />
     
 </RelativeLayout>
