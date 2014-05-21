@@ -88,11 +88,6 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 			this.existingReminder = (Reminder)args.getSerializable(ARG_EXISTING_REMINDER);
 		}
 		
-		if(this.existingReminder != null){
-			this.origin = this.existingReminder.getOriginLatLng();
-			this.destination = this.existingReminder.getDestinationLatLng();
-		}
-		
 		return rl;
 	}
 	
@@ -123,10 +118,26 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 	        
 	        map.setOnMapClickListener(clickListener);
 	    }
+	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+	    super.setUserVisibleHint(isVisibleToUser);
+	    if (isVisibleToUser) {
+	    	updateFragment();
+	    }
+	}
+	
+	public void updateFragment(){
+		this.existingReminder = RemindersHelper.getReminder(existingReminder.getReminderID());
+	    this.origin = this.existingReminder.getOriginLatLng();
+		this.destination = this.existingReminder.getDestinationLatLng();
 	    
 	    updateTextFields();
 	    drawMarkers();
-	    drawPath();
+	    
+	    directions.setDetailsFromReminder(this.existingReminder);
+		directions.requestDirections(this);
 	}
 	
 	public void updateTextFields(){
@@ -183,9 +194,7 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 		}
 		
 		if(origin != null && destination != null){
-			directions.setOrigin(origin);
-			directions.setDestination(destination);
-			directions.setMode("driving");
+			directions.setDetailsFromReminder(this.existingReminder);
 			directions.requestDirections(this);
 		}
 		

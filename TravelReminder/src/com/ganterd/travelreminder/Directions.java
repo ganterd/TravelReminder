@@ -2,6 +2,7 @@ package com.ganterd.travelreminder;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
@@ -25,10 +26,17 @@ public class Directions {
 	protected LatLng origin;
 	protected LatLng destination;
 	protected OnDirectionsReadyListener listener;
-	protected String mode = "driving";
+	protected int mode = Reminder.MODE_DRIVING; // See Reminder class for modes
+	protected Date departureTime = new Date();
 	
 	public interface OnDirectionsReadyListener{
 		public void onDirectionsReady(JSONObject directions);
+	}
+	
+	public void setDetailsFromReminder(Reminder r){
+		this.setOrigin(r.getOriginLatLng());
+		this.setDestination(r.getDestinationLatLng());
+		this.mode = r.getTravelMode();
 	}
 	
 	public void setOrigin(LatLng origin){
@@ -39,7 +47,7 @@ public class Directions {
 		this.destination = destination;
 	}
 	
-	public void setMode(String mode){
+	public void setMode(int mode){
 		this.mode = mode;
 	}
 	
@@ -81,7 +89,30 @@ public class Directions {
 			url += "origin=" + origin.latitude + "," + origin.longitude;
 			url += "&destination=" + destination.latitude + "," + destination.longitude;
 			url += "&sensor=false";
-			url += "&mode=" + mode;
+			
+			String modeString = "";
+			switch(mode){
+			case Reminder.MODE_DRIVING:
+				modeString = "driving";
+				break;
+			case Reminder.MODE_WALKING:
+				modeString = "walking";
+				break;
+			case Reminder.MODE_CYCLING:
+				modeString = "bicycling";
+				break;
+			case Reminder.MODE_PUBLIC_TRANSIT:
+				modeString = "transit";
+				break;
+			default:
+				modeString = "walking";
+			}
+			url += "&mode=" + modeString;
+			
+			if(departureTime != null){
+				String t = Long.toString(departureTime.getTime()/1000);
+				url += "&departure_time=" + t;
+			}
 			
 			HttpClient httpClient = new DefaultHttpClient();
 			HttpContext localContext = new BasicHttpContext();

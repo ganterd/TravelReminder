@@ -60,14 +60,23 @@ public class ReminderEditTravelInfo extends Fragment {
 		        R.array.reminder_edit_travel_info_modes, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelModeSpinner.setAdapter(adapter);
-		travelModeSpinner.setSelection(this.reminder.getTravelMode());
 		travelModeSpinner.setOnItemSelectedListener(this.travelModeOnItemSelectedListener);
 		
-		if(args != null){
-			//EditText reminderNameInput = (EditText) rl.findViewById(R.id.textReminderName);
-			//reminderNameInput.setText(args.getString(ARG_EXISTING_REMINDER));
-		}
-		
 		return rl;
+	}
+	
+	@Override
+	public void setUserVisibleHint(boolean isVisibleToUser) {
+	    super.setUserVisibleHint(isVisibleToUser);
+	    if (isVisibleToUser) {
+	    	updateFragment();
+	    }
+	}
+	
+	public void updateFragment(){
+		this.reminder = RemindersHelper.getReminder(reminder.getReminderID());
+		
+		Spinner travelModeSpinner = (Spinner) getView().findViewById(R.id.reminder_edit_travel_info_mode);
+		travelModeSpinner.setSelection(this.reminder.getTravelMode());
 	}
 }
