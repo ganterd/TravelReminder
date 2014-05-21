@@ -9,6 +9,11 @@ import com.google.android.gms.maps.model.LatLng;
 
 @SuppressWarnings("serial")
 public class Reminder implements IReminder, Serializable{
+	public static final int MODE_DRIVING = 0;
+	public static final int MODE_WALKING = 1;
+	public static final int MODE_CYCLING = 2;
+	public static final int MODE_PUBLIC_TRANSIT = 3;
+	
 	String name = null;
 	int reminderLeadTimeMinutes = 0;
 	int reminderLeadTimeHours = 0;
@@ -16,6 +21,7 @@ public class Reminder implements IReminder, Serializable{
 	String id = null;
 	double[] origin = new double[2];
 	double[] destination = new double[2];
+	private int travelMode = 0; 
 
 	/**
 	 * Default constructor. Sets most things to empty values except the destination target time
@@ -67,6 +73,10 @@ public class Reminder implements IReminder, Serializable{
 	@Override
 	public void setReminderLeadTimeHours(int hours) {
 		this.reminderLeadTimeHours = hours;	
+	}
+	
+	public void setTravelMode(int mode){
+		this.travelMode = mode;
 	}
 
 	@Override
@@ -133,5 +143,9 @@ public class Reminder implements IReminder, Serializable{
 	@JsonIgnore
 	public LatLng getDestinationLatLng() {
 		return new LatLng(this.destination[0], this.destination[1]);
+	}
+	
+	public int getTravelMode(){
+		return this.travelMode;
 	}
 }

@@ -41,5 +41,15 @@
     <string name="reminder_details_location_label_end_point">To:</string>
     <string name="reminder_details_location_hint_start_point">Select Point on Map</string>
     <string name="reminder_details_location_hint_end_point">Select Point on Map</string>
-
+    
+    <!-- Reminder Details Travel Info -->
+    <string name="reminder_details_travel_info_mode_label">Mode:</string>
+    <string-array name="reminder_edit_travel_info_modes">
+        <item>Driving</item>
+        <item>Walking</item>
+        <item>Cycling</item>
+        <item>Public Transit</item>
+    </string-array>
+    <string name="reminder_details_travel_info_arrival_time_label">Arrival Time:</string>
+    <string name="reminder_details_travel_info_recurring_label">Recurring:</string>
 </resources>

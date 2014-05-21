@@ -14,6 +14,7 @@ import android.widget.EditText;
 
 import com.ganterd.travelreminder.fragments.ReminderEditFragment;
 import com.ganterd.travelreminder.fragments.ReminderEditLocationInfo;
+import com.ganterd.travelreminder.fragments.ReminderEditTravelInfo;
 
 // TODO: Add Google Maps Selection
 public class CreateTravelReminderActivity extends FragmentActivity {
@@ -90,6 +91,8 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 					return ReminderEditFragment.newInstance(existingReminder);
 				case 1:
 					return ReminderEditLocationInfo.newInstance(existingReminder);
+				case 2:
+					return ReminderEditTravelInfo.newInstance(existingReminder);
 				default:
 					return null;
 			}
@@ -97,7 +100,7 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 
 	    @Override
 	    public int getCount() {
-	        return 2;
+	        return 3;
 	    }
 
 	    @Override
@@ -108,6 +111,9 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 					stringID = R.string.reminder_details_tab_title_details;
 					break;
 				case 1:
+					stringID = R.string.reminder_details_tab_title_location_info;
+					break;
+				case 2:
 					stringID = R.string.reminder_details_tab_title_location_info;
 					break;
 				default:
