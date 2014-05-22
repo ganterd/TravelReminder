@@ -1,6 +1,7 @@
 package com.ganterd.travelreminder.fragments;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
@@ -75,7 +76,6 @@ public class ReminderEditTravelInfo extends Fragment implements ReminderEditArri
 		        R.array.reminder_edit_travel_info_modes, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelModeSpinner.setAdapter(adapter);
-		travelModeSpinner.setOnItemSelectedListener(this.travelModeOnItemSelectedListener);
 		
 		return rl;
 	}
@@ -85,6 +85,7 @@ public class ReminderEditTravelInfo extends Fragment implements ReminderEditArri
 	    super.setUserVisibleHint(isVisibleToUser);
 	    if (isVisibleToUser) {
 	    	updateFragment();
+	    	((Spinner) getView().findViewById(R.id.reminder_edit_travel_info_mode)).setOnItemSelectedListener(this.travelModeOnItemSelectedListener);
 	    }
 	}
 	
@@ -98,7 +99,7 @@ public class ReminderEditTravelInfo extends Fragment implements ReminderEditArri
 		this.reminder = RemindersHelper.getReminder(reminder.getReminderID());
 		
 		EditText arrivalTimeEditText = (EditText) getView().findViewById(R.id.reminder_edit_travel_info_arrival_time);
-		arrivalTimeEditText.setText(DateFormat.getTimeFormat(getActivity()).format(reminder.getArrivalTime().getTime()));
+		arrivalTimeEditText.setText(this.reminder.getArrivalTimeHour() + ":" + this.reminder.getArrivalTimeMinutes());
 		
 		Spinner travelModeSpinner = (Spinner) getView().findViewById(R.id.reminder_edit_travel_info_mode);
 		travelModeSpinner.setSelection(this.reminder.getTravelMode());

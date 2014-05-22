@@ -1,15 +1,15 @@
 package com.ganterd.travelreminder.test;
 
-import java.util.Date;
+import java.util.Calendar;
+
+import junit.framework.TestCase;
 
 import com.ganterd.travelreminder.Reminder;
 import com.ganterd.travelreminder.RemindersHelper;
 
-import junit.framework.TestCase;
-
 public class RemindersHelperTest extends TestCase {
 	public void testAddAndGetReminder(){
-		Reminder reminder = new Reminder("testReminderID", "Test Reminder", 10, 2, new Date());
+		Reminder reminder = new Reminder("testReminderID", "Test Reminder", 10, 2, Calendar.getInstance());
 		
 		RemindersHelper.saveReminder(reminder);
 		Reminder savedReminder = RemindersHelper.getReminder(reminder.getReminderID());
