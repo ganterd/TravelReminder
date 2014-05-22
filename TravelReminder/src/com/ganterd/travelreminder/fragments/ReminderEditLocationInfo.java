@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.ganterd.travelreminder.Directions;
 import com.ganterd.travelreminder.Reminder;
@@ -43,6 +44,8 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 	
 	private PolylineOptions path = null;
 	private Directions directions = new Directions();
+	
+	private Toast toast = null;
 	
 	private GoogleMap.OnMapClickListener clickListener = new GoogleMap.OnMapClickListener() {
 		@Override
@@ -136,8 +139,19 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 	    updateTextFields();
 	    drawMarkers();
 	    
-	    directions.setDetailsFromReminder(this.existingReminder);
-		directions.requestDirections(this);
+	    updateDirections();
+	}
+	
+	private void updateDirections(){
+		if(origin != null && destination != null){
+			directions.setDetailsFromReminder(this.existingReminder);
+			directions.requestDirections(this);
+
+			if(toast != null)
+				toast.cancel();
+			toast = Toast.makeText(getActivity().getApplicationContext(), "Gettings directions...", Toast.LENGTH_LONG);
+			toast.show();
+		}
 	}
 	
 	public void updateTextFields(){
@@ -167,6 +181,8 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 	
 	@Override
 	public void onDirectionsReady(JSONObject directions){
+		if(toast != null)
+			toast.cancel();
 		this.path = Directions.getDirectionsPath(directions);
 		drawPath();
 	}
@@ -193,10 +209,7 @@ public class ReminderEditLocationInfo extends Fragment implements OnDirectionsRe
 			}
 		}
 		
-		if(origin != null && destination != null){
-			directions.setDetailsFromReminder(this.existingReminder);
-			directions.requestDirections(this);
-		}
+		updateDirections();
 		
 		updateTextFields();
 		drawMarkers();
