@@ -16,12 +16,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.ExpandableListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 import com.ganterd.travelreminder.R;
 import com.ganterd.travelreminder.Reminder;
 import com.ganterd.travelreminder.RemindersHelper;
+import com.ganterd.travelreminder.adapters.ReminderEditInfoRecurringDaysAdapter;
 
 public class ReminderEditTravelInfo extends Fragment implements ReminderEditArrivalTimePickerFragment.OnArrivalTimeUpdatedListener{
 	public static final String ARG_EXISTING_REMINDER = "ARG_EXISTING_REMINDER";
@@ -76,6 +78,10 @@ public class ReminderEditTravelInfo extends Fragment implements ReminderEditArri
 		        R.array.reminder_edit_travel_info_modes, android.R.layout.simple_spinner_item);
 		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 		travelModeSpinner.setAdapter(adapter);
+		
+		ExpandableListView recurringDays = (ExpandableListView) rl.findViewById(R.id.reminder_edit_travel_info_recurring_options_list);
+		ReminderEditInfoRecurringDaysAdapter recurringDaysAdapter = new ReminderEditInfoRecurringDaysAdapter(getActivity(), this.reminder);
+		recurringDays.setAdapter(recurringDaysAdapter);
 		
 		return rl;
 	}

@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/reminder_edit_travel_info_mode"
         android:layout_alignTop="@+id/reminder_edit_travel_info_mode"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="@string/reminder_details_travel_info_mode_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -33,7 +33,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/reminder_edit_travel_info_arrival_time"
         android:layout_alignTop="@+id/reminder_edit_travel_info_arrival_time"
-        android:gravity="center"
+        android:gravity="center_vertical"
         android:text="@string/reminder_details_travel_info_arrival_time_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -50,19 +50,27 @@
         android:id="@+id/reminder_edit_travel_info_recurring_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
         android:layout_alignBottom="@+id/reminder_edit_travel_info_recurring"
         android:layout_alignTop="@+id/reminder_edit_travel_info_recurring"
-        android:gravity="center"
+        android:layout_below="@+id/reminder_edit_travel_info_arrival_time"
+        android:gravity="center_vertical"
         android:text="@string/reminder_details_travel_info_recurring_label"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-    <EditText
+    <CheckBox
         android:id="@+id/reminder_edit_travel_info_recurring"
-    	android:layout_below="@+id/reminder_edit_travel_info_arrival_time_label"
-		android:layout_width="fill_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/reminder_edit_travel_info_recurring_label"
-        android:ems="10"
-        android:inputType="none" />
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/reminder_edit_travel_info_arrival_time" />
+    
+    <ExpandableListView 
+        android:id="@+id/reminder_edit_travel_info_recurring_options_list"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/reminder_edit_travel_info_recurring_label">	    
+    </ExpandableListView>
     
 </RelativeLayout>

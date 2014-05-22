@@ -14,6 +14,14 @@ public class Reminder implements IReminder, Serializable{
 	public static final int MODE_CYCLING = 2;
 	public static final int MODE_PUBLIC_TRANSIT = 3;
 	
+	public static final int RECCURING_MONDAY = 0;
+	public static final int RECCURING_TUESDAY = 1;
+	public static final int RECCURING_WEDNESDAY = 2;
+	public static final int RECCURING_THURSDAY = 3;
+	public static final int RECCURING_FRIDAY = 4;
+	public static final int RECCURING_SATURDAY = 5;
+	public static final int RECCURING_SUNDAY = 6;
+	
 	private String name = null;
 	private int reminderLeadTimeMinutes = 0;
 	private int reminderLeadTimeHours = 0;
@@ -22,6 +30,7 @@ public class Reminder implements IReminder, Serializable{
 	private double[] origin = new double[2];
 	private double[] destination = new double[2];
 	private int travelMode = 0; 
+	private boolean[] recurringDayStates = new boolean[7];
 
 	/**
 	 * Default constructor. Sets most things to empty values except the destination target time
@@ -177,5 +186,23 @@ public class Reminder implements IReminder, Serializable{
 	@JsonIgnore
 	public int getArrivalTimeMinutes() {
 		return this.destinationTargetTime.get(Calendar.MINUTE);
+	}
+	
+	public void setRecurring(int day, boolean recurring){
+		if(day < 0 || day >= 6)
+			return;
+		
+		this.recurringDayStates[day] = recurring;
+	}
+	
+	public boolean getRecurring(int day){
+		if(day < 0 || day > 6)
+			return false;
+		
+		return this.recurringDayStates[day];
+	}
+	
+	public boolean[] getAllRecurringStates(){
+		return this.recurringDayStates;
 	}
 }
