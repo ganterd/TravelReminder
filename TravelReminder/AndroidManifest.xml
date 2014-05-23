@@ -30,7 +30,7 @@
         android:theme="@style/AppTheme" >
         
         <meta-data android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
-	    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyAndYECPGLtUFT8aSutFOP_S0nqdV97j0U"/>
+	    <meta-data android:name="com.google.android.maps.v2.API_KEY" android:value="AIzaSyASndYvTIO8jvvjdanu0hRu13coYwlXcso"/>
 	    
         <activity
             android:name="com.ganterd.travelreminder.MainActivity"
