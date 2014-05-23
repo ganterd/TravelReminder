@@ -19,7 +19,6 @@
 	    android:layout_height="wrap_content"
 	    android:layout_toLeftOf="@id/reminder_edit_general_recurring_day_check"
 	    android:paddingTop="5dp"
-	    android:text="DAY"
 	    android:textAppearance="?android:attr/textAppearanceMedium" />
 
 </RelativeLayout>

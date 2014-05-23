@@ -61,4 +61,5 @@
     </string-array>
     <string name="reminder_details_travel_info_arrival_time_label">Arrival Time:</string>
     <string name="reminder_details_travel_info_recurring_label">Recurring:</string>
+    <string name="reminder_edit_details_general_recurring_days_group_title">Recurring Days</string>
 </resources>

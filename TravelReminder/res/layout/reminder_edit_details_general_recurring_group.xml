@@ -5,5 +5,5 @@
     android:layout_height="?android:attr/listPreferredItemHeight"
     android:layout_marginLeft="8dp"
     android:gravity="left"
-    android:text="Recurring Days"
+    android:text="@string/reminder_edit_details_general_recurring_days_group_title"
     android:textAppearance="?android:attr/textAppearanceMedium" /> 
