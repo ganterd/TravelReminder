@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.CheckBox;
+import android.widget.CheckedTextView;
 import android.widget.TextView;
 
 import com.ganterd.travelreminder.R;
@@ -25,35 +26,9 @@ public class ReminderEditInfoRecurringDaysAdapter extends BaseExpandableListAdap
 		this.dayStrings = context.getResources().getStringArray(R.array.days);
 		this.states = r.getAllRecurringStates();
 	}
-	
-	@Override
-	public View getView(int position, View convertView, ViewGroup parent){
-	    LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.reminder_edit_details_general_recurring_day_row, parent, false);
-        
-        TextView recurringDayLabel = (TextView) rowView.findViewById(R.id.reminder_edit_general_recurring_day_label);
-        CheckBox recurringDayCheckBox = (CheckBox) rowView.findViewById(R.id.reminder_edit_general_recurring_day_check);
-        
-        recurringDayLabel.setText(dayStrings[position]);
-        recurringDayCheckBox.setChecked(states[position]);
-        
-        rowView.setTag(position);
-        
-        rowView.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				CheckBox c = (CheckBox)v.findViewById(R.id.reminder_edit_general_recurring_day_check);
-				reminder.setRecurring(Integer.parseInt(((String)v.getTag())), c.isChecked());
-				RemindersHelper.saveReminder(reminder);
-			}
-		});
-
-        return rowView;
-	}
 
 	@Override
-	public Object getChild(int arg0, int arg1) {
-		// TODO Auto-generated method stub
+	public Object getChild(int arg0, int position) {
 		return null;
 	}
 
@@ -64,15 +39,39 @@ public class ReminderEditInfoRecurringDaysAdapter extends BaseExpandableListAdap
 	}
 
 	@Override
-	public View getChildView(int arg0, int arg1, boolean arg2, View arg3, ViewGroup arg4) {
-		// TODO Auto-generated method stub
-		return null;
+	public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		
+		if(convertView == null){
+			convertView = inflater.inflate(R.layout.reminder_edit_details_general_recurring_day_row, parent, false);
+		}
+        
+        TextView recurringDayLabel = (TextView) convertView.findViewById(R.id.reminder_edit_general_recurring_day_label);
+        CheckBox recurringDayCheckBox = (CheckBox) convertView.findViewById(R.id.reminder_edit_general_recurring_day_check);
+        
+        recurringDayLabel.setText(dayStrings[childPosition]);
+        recurringDayCheckBox.setChecked(states[childPosition]);
+        
+        convertView.setTag(childPosition);
+        
+        convertView.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				CheckBox c = (CheckBox)v.findViewById(R.id.reminder_edit_general_recurring_day_check);
+				c.setChecked(!c.isChecked());
+				int day = (Integer) v.getTag();
+				reminder.setRecurring(day, c.isChecked());
+				RemindersHelper.saveReminder(reminder);
+			}
+		});
+
+        return convertView;
 	}
 
 	@Override
 	public int getChildrenCount(int arg0) {
 		// TODO Auto-generated method stub
-		return 0;
+		return 7;
 	}
 
 	@Override
@@ -83,8 +82,7 @@ public class ReminderEditInfoRecurringDaysAdapter extends BaseExpandableListAdap
 
 	@Override
 	public int getGroupCount() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 1;
 	}
 
 	@Override
@@ -94,9 +92,13 @@ public class ReminderEditInfoRecurringDaysAdapter extends BaseExpandableListAdap
 	}
 
 	@Override
-	public View getGroupView(int arg0, boolean arg1, View arg2, ViewGroup arg3) {
-		// TODO Auto-generated method stub
-		return null;
+	public View getGroupView(int groupPosition, boolean isExpanded, View convertView, ViewGroup parent) {
+		LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+		if(convertView == null)
+			convertView = inflater.inflate(R.layout.reminder_edit_details_general_recurring_group, null);
+		
+		((CheckedTextView)convertView).setChecked(isExpanded);
+		return convertView;
 	}
 
 	@Override

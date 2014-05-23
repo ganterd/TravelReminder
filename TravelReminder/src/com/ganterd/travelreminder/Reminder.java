@@ -188,6 +188,16 @@ public class Reminder implements IReminder, Serializable{
 		return this.destinationTargetTime.get(Calendar.MINUTE);
 	}
 	
+	public void setRecurringDayStates(boolean[] states){
+		if(states.length != this.recurringDayStates.length)
+			return;
+		this.recurringDayStates = states;
+	}
+	
+	public boolean[] getRecurringDayStates(){
+		return this.recurringDayStates;
+	}
+	
 	public void setRecurring(int day, boolean recurring){
 		if(day < 0 || day >= 6)
 			return;
@@ -202,6 +212,7 @@ public class Reminder implements IReminder, Serializable{
 		return this.recurringDayStates[day];
 	}
 	
+	@JsonIgnore
 	public boolean[] getAllRecurringStates(){
 		return this.recurringDayStates;
 	}
