@@ -1,9 +1,15 @@
-<CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/textView1"
-    android:layout_width="wrap_content"
-    android:layout_height="?android:attr/listPreferredItemHeight"
-    android:layout_marginLeft="8dp"
-    android:gravity="left"
-    android:text="@string/reminder_edit_details_general_recurring_days_group_title"
-    android:textAppearance="?android:attr/textAppearanceMedium" /> 
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent" >
+
+    <TextView 
+	    android:id="@+id/reminder_edit_details_general_recurring_group_title"
+	    android:layout_width="fill_parent"
+		android:layout_height="@dimen/reminder_edit_details_general_row_height"
+	    android:gravity="center_vertical"
+	    android:text="@string/reminder_edit_details_general_recurring_days_group_title"
+	    android:paddingLeft="32dp"
+	    android:textAppearance="?android:attr/textAppearanceMedium" /> 
+	    
+</RelativeLayout>

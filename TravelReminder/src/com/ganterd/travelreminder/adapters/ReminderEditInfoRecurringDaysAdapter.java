@@ -96,7 +96,9 @@ public class ReminderEditInfoRecurringDaysAdapter extends BaseExpandableListAdap
 		if(convertView == null)
 			convertView = inflater.inflate(R.layout.reminder_edit_details_general_recurring_group, null);
 		
-		((CheckedTextView)convertView).setChecked(isExpanded);
+		
+		
+		//((CheckedTextView)convertView).setChecked(isExpanded);
 		return convertView;
 	}
 

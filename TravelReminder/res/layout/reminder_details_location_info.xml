@@ -15,17 +15,16 @@
         <TextView
             android:id="@+id/textDescReminderStartPoint"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textReminderStartPoint"
+            android:layout_height="@dimen/reminder_edit_details_general_row_height"
             android:layout_alignTop="@+id/textReminderStartPoint"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/reminder_details_location_label_start_point"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <EditText
             android:id="@+id/textReminderStartPoint"
 	   		android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_edit_details_general_row_height"
             android:layout_toRightOf="@+id/textDescReminderStartPoint"
             android:ems="10"
             android:hint="@string/reminder_details_location_hint_start_point"
@@ -34,10 +33,9 @@
         <TextView
             android:id="@+id/textDescReminderEndPoint"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/textReminderEndPoint"
+            android:layout_height="@dimen/reminder_edit_details_general_row_height"
             android:layout_alignTop="@+id/textReminderEndPoint"
-            android:gravity="center"
+            android:gravity="center_vertical"
             android:text="@string/reminder_details_location_label_end_point"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -45,7 +43,7 @@
             android:id="@+id/textReminderEndPoint"
         	android:layout_below="@+id/textReminderStartPoint"
 	   		android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/reminder_edit_details_general_row_height"
             android:layout_toRightOf="@+id/textDescReminderEndPoint"
             android:ems="10"
             android:hint="@string/reminder_details_location_hint_end_point"
