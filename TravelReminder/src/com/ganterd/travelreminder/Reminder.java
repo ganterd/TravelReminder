@@ -199,7 +199,7 @@ public class Reminder implements IReminder, Serializable{
 	}
 	
 	public void setRecurring(int day, boolean recurring){
-		if(day < 0 || day >= 6)
+		if(day < 0 || day >= 7)
 			return;
 		
 		this.recurringDayStates[day] = recurring;
