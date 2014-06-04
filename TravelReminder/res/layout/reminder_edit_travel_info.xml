@@ -46,13 +46,4 @@
         android:ems="10"
         android:inputType="none" />
     
-    <ExpandableListView
-        android:id="@+id/reminder_edit_travel_info_recurring_options_list"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@+id/reminder_edit_travel_info_arrival_time" >
-	    
-    </ExpandableListView>
-    
 </RelativeLayout>

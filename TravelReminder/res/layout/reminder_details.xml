@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/reminder_details"
+    android:name="com.ganterd.travelreminder.fragments.ReminderEditFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:name="com.ganterd.travelreminder.fragments.ReminderEditFragment" >
-    
-	<LinearLayout
+    android:layout_height="match_parent" >
+
+    <LinearLayout
         android:id="@+id/createTravelReminderLinearLayoutReminderName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -48,12 +48,106 @@
             android:layout_height="wrap_content"
             android:text="@string/text_create_reminder_desc_reminder_alert_time"
             android:textAppearance="?android:attr/textAppearanceMedium" />
-
-        <Spinner
-            android:id="@+id/createTravelReminderAlertTimeSpinner"
+        
+        <EditText
+            android:id="@+id/editReminderAlertLeadTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:ems="10"
+            android:inputType="number" />
+    </LinearLayout>
+
+    <!-- Recurring Days -->
+
+    <LinearLayout
+        android:id="@+id/editTravelReminderRecurringDays"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/createTravelReminderLinearLayoutReminderAlertTime"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_list_vertical_margin"
+        android:columnCount="7"
+        android:rowCount="1" >
+
+        <ToggleButton
+            android:id="@+id/editTravelReminderToggleMonday"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/reminder_edit_recurring_days_height"
+            android:layout_gravity="left"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:text="@string/reminder_details_general_recurring_monday"
+            android:textOff="@string/reminder_details_general_recurring_monday"
+            android:textOn="@string/reminder_details_general_recurring_monday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleTuesday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_tuesday"
+	        android:textOff="@string/reminder_details_general_recurring_tuesday"
+	        android:textOn="@string/reminder_details_general_recurring_tuesday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleWednesday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_wednesday"
+	        android:textOff="@string/reminder_details_general_recurring_wednesday"
+	        android:textOn="@string/reminder_details_general_recurring_wednesday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleThursday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_thursday"
+	        android:textOff="@string/reminder_details_general_recurring_thursday"
+	        android:textOn="@string/reminder_details_general_recurring_thursday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleFriday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_friday"
+	        android:textOff="@string/reminder_details_general_recurring_friday"
+	        android:textOn="@string/reminder_details_general_recurring_friday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleSaturday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_saturday"
+	        android:textOff="@string/reminder_details_general_recurring_saturday"
+	        android:textOn="@string/reminder_details_general_recurring_saturday" />
+        
+        <ToggleButton
+	        android:id="@+id/editTravelReminderToggleSunday"
+	        android:paddingLeft="0px"
+	        android:paddingRight="0px"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+	        android:layout_height="@dimen/reminder_edit_recurring_days_height"
+	        android:text="@string/reminder_details_general_recurring_sunday"
+	        android:textOff="@string/reminder_details_general_recurring_sunday"
+	        android:textOn="@string/reminder_details_general_recurring_sunday" />
     </LinearLayout>
 
     <LinearLayout
@@ -61,19 +155,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="false"
-        android:layout_below="@id/createTravelReminderLinearLayoutReminderAlertTime"
+        android:layout_below="@id/editTravelReminderRecurringDays"
         android:orientation="horizontal"
         android:paddingLeft="@dimen/activity_horizontal_margin"
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_list_vertical_margin" >
-
-        <Button
-            android:id="@+id/createTravelReminderButtonCreate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:onClick="createNewTravelReminder"
-            android:text="@string/button_create_new_travel_reminder_confirm" />
     </LinearLayout>
-    
+
 </RelativeLayout>

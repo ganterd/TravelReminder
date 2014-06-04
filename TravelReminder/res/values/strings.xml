@@ -45,6 +45,14 @@
     <string name="text_create_reminder_desc_reminder_name">Name:</string>
     <string name="text_create_reminder_desc_reminder_alert_time">Leading Time:</string>
     
+    <string name="reminder_details_general_recurring_monday">MON</string>
+    <string name="reminder_details_general_recurring_tuesday">TUE</string>
+    <string name="reminder_details_general_recurring_wednesday">WED</string>
+    <string name="reminder_details_general_recurring_thursday">THU</string>
+    <string name="reminder_details_general_recurring_friday">FRI</string>
+    <string name="reminder_details_general_recurring_saturday">SAT</string>
+    <string name="reminder_details_general_recurring_sunday">SUN</string>
+    
     <!-- Reminder Details Location Info -->
     <string name="reminder_details_location_label_start_point">From:</string>
     <string name="reminder_details_location_label_end_point">To:</string>
