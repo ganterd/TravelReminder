@@ -5,24 +5,20 @@ import java.util.Date;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.EditText;
 
 import com.ganterd.travelreminder.fragments.ReminderEditFragment;
 import com.ganterd.travelreminder.fragments.ReminderEditLocationInfo;
-import com.ganterd.travelreminder.fragments.ReminderEditTravelInfo;
 
 // TODO: Add Google Maps Selection
 public class CreateTravelReminderActivity extends FragmentActivity {
 	/* Intent Parameters */
 	public static final String PARAM_REMINDER_ID = "PARAM_REMINDER_ID";
 	
-	CreateTravelReminderPagerAdapter pagerAdapter;
 	ViewPager viewPager;
 	
 	private Reminder existingReminder;
@@ -38,12 +34,16 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 		if(existingReminderID != null && !existingReminderID.isEmpty()){
 			existingReminder = RemindersHelper.getReminder(existingReminderID);
 		}
-		
-		pagerAdapter = new CreateTravelReminderPagerAdapter(getSupportFragmentManager(), existingReminder);
-		viewPager = (ViewPager) findViewById(R.id.pager);
-		viewPager.setAdapter(pagerAdapter);
 
 		setupActionBar();
+		
+		ReminderEditFragment reminderEditFragment = ReminderEditFragment.newInstance(existingReminder);
+		ReminderEditLocationInfo reminderLocationFragment = ReminderEditLocationInfo.newInstance(existingReminder);
+		
+		FragmentTransaction ft = this.getSupportFragmentManager().beginTransaction();
+		ft.replace(R.id.edit_reminder_general_fragment, reminderEditFragment);
+		ft.replace(R.id.edit_reminder_location_fragment, reminderLocationFragment);
+		ft.commit();
 	}
 
 	/**
@@ -70,58 +70,5 @@ public class CreateTravelReminderActivity extends FragmentActivity {
 		}
 		
 		finish();
-	}
-
-	/**
-	 * Class that handles the pager adapter
-	 * 
-	 * @author David Ganter
-	 */
-	public class CreateTravelReminderPagerAdapter extends FragmentStatePagerAdapter {
-		Reminder existingReminder = null;
-		
-	    public CreateTravelReminderPagerAdapter(FragmentManager fm, Reminder existingReminder) {
-	        super(fm);
-	        this.existingReminder = existingReminder;
-	    }
-
-	    @Override
-	    public Fragment getItem(int i) {
-	        switch (i) {
-				case 0:
-					return ReminderEditFragment.newInstance(existingReminder);
-				case 1:
-					return ReminderEditLocationInfo.newInstance(existingReminder);
-				case 2:
-					return ReminderEditTravelInfo.newInstance(existingReminder);
-				default:
-					return null;
-			}
-	    }
-
-	    @Override
-	    public int getCount() {
-	        return 3;
-	    }
-
-	    @Override
-	    public CharSequence getPageTitle(int position) {
-	    	int stringID = 0;
-	    	switch (position) {
-				case 0:
-					stringID = R.string.reminder_details_tab_title_details;
-					break;
-				case 1:
-					stringID = R.string.reminder_details_tab_title_location_info;
-					break;
-				case 2:
-					stringID = R.string.reminder_details_tab_title_location_info;
-					break;
-				default:
-					return "";
-			}
-	    	
-	    	return getResources().getString(stringID);
-	    }
 	}
 }

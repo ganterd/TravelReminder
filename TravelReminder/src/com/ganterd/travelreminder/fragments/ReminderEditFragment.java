@@ -26,6 +26,10 @@ public class ReminderEditFragment extends Fragment {
 	
 	Reminder existingReminder = null;
 	
+	public ReminderEditFragment(){
+		super();
+	}
+	
 	public static ReminderEditFragment newInstance(Reminder existingReminder){
 		ReminderEditFragment f = new ReminderEditFragment();
 		
